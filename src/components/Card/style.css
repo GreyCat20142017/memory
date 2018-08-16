@@ -1,0 +1,145 @@
+.card {
+  display: flex;
+  visibility: visible;
+  justify-content: flex-start;
+  width: 60px;
+  height: 75px;
+  margin: 0;
+  padding: 10px;
+  flex-shrink: 0;
+  font-size: 20px;
+  transform: scale(1);
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  color: navy;
+  background-color: rgb(250, 250, 250);
+  box-shadow: 0 0 5px 5px rgba(180, 180, 180, 0.2);
+  cursor: pointer;
+}
+
+.card--black {
+  color: navy;
+}
+
+.card--red {
+  color: red;
+}
+
+.card--1 {
+  background-color: oldlace;
+}
+
+.card--2 {
+  background-color: rgba(132, 157, 143, 0.5); /*remember Gllacy rgba(132, 157, 143, 0.5) rgba(157, 139, 132, 1) rgba(137, 150, 166, 1)*/
+}
+
+.card--3 {
+  background-color: tan;
+}
+
+.card--4 {
+  background-color: lightgrey;
+}
+
+.card--5 {
+  background-color: lightsteelblue;
+}
+
+.card--6 {
+  background-color: rgba(137, 150, 166, 1);
+}
+
+.card--7 {
+  background-color: ghostwhite;
+}
+
+.card--8 {
+  background-color: lavender;
+}
+
+.card--9 {
+  background-color: thistle;
+}
+
+.card--open {
+  position: relative;
+  text-align: center;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.7), transparent);
+}
+
+.card:hover,
+.card:focus {
+  transition: transform 0.1s;
+  transform: scale(1.04);
+  border-color: rgb(80, 80, 80);
+  outline: none;
+  opacity: 0.6;
+}
+
+.card:hover::before,
+.card:focus::before {
+  transform: scale(1.4);
+  text-shadow: 5px 5px rgba(180, 180, 180, 0.2);
+}
+
+.card:focus {
+  box-shadow: 0 0 5px 5px rgba(50, 50, 250, 0.2);
+}
+
+.card--open::before {
+  content: attr(data-suit);
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 40px;
+}
+
+.card--closed {
+  background-color: rgb(250, 250, 250);
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, navy 5px, navy 9px);
+  opacity: 0.2;
+}
+
+.card--closed .card__content {
+  display: none;
+}
+
+/*.card__content--suit {
+  margin-left: auto;
+}
+*/
+
+.card__content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.card__content::before {
+  content:  attr(data-value);
+ }
+
+.card__content::after {
+  content:  attr(data-suit);
+ }
+
+.card--invisible {
+  visibility: hidden;
+}
+
+@media (min-width: 768px) {
+  .card {
+    width: 100px;
+    height: 150px;
+    font-size: 24px;
+  }
+
+  .card--open::before {
+    top: 67px;
+    font-size: 70px;
+  }
+}

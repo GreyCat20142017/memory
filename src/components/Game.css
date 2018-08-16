@@ -1,0 +1,141 @@
+/** {outline: 1px dashed red;}*/
+
+.game {
+  width: 270px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.game__wrapper {
+  min-height: 510px;
+  margin: 5px auto;
+  position: relative;
+  /*box-shadow: 0 0 1px rgba(0, 0, 128, 0.3);*/
+}
+
+.game__wrapper--config {
+	/*box-shadow: 2px 2px 5px 3px rgba(0, 0, 128, 0.8), 0px 0px 1px 1px rgba(0, 0, 128, 0.8);	*/
+  box-shadow: 0 0 1px rgba(0, 0, 128, 0.8), 6px 6px 25px rgba(0, 0, 100, 0.3);
+	color: navy;
+	opacity: 0.7;
+}
+
+.game__layout {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  padding: 0;
+  list-style: none;
+}
+
+.game__item {
+  margin: 5px 10px;
+}
+
+.game__controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0 5px;
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 14px;
+  box-shadow: 0 0 1px rgba(0, 0, 128, 0.3);
+}
+
+.game__score {
+  display: inline-block;
+  width: 100%;
+  padding: 4px 0;
+  text-align: center;
+  vertical-align: baseline;
+  color: navy;
+}
+
+.game__btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  font: inherit;
+  text-align: center;
+  vertical-align: baseline;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  border: none;
+  color: white;
+  background-color: navy;
+}
+
+.game__btn--small {
+	font-size: 12px;
+  line-height: 12px;
+}
+
+.game__btn:hover,
+.game__btn:focus {
+  color: white;
+  box-shadow: 0 0 10px 2px white inset, 1px 1px 1px 1px navy, -1px -1px 1px 1px navy;
+}
+
+.game__btn:active {
+  opacity: 0.5;
+}
+
+.game__btn--config {
+  padding: 8px;
+}
+
+.game__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-left: 0;
+}
+
+.game__buttons--form {
+	 margin-top: 20px;
+	 margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .game {
+    width: 740px;
+  }
+
+  .game__wrapper {
+    min-height: 470px;
+    margin: 50px auto;
+  }
+
+  .game__controls {
+    margin: 20px 0 10px;
+    font-size: 20px;
+  	line-height: 20px;
+  }
+
+  .game__score {
+    width: auto;
+    font-size: 20px;
+    text-align: left;
+    padding: 14px 0 4px;
+  }
+
+  .game__score br {
+  	display: none;
+  }
+
+  .game__buttons {
+    justify-content: flex-start;
+    width: auto;
+    margin-left: auto;
+  }
+
+  .game__btn--small {
+  	font-size: 18px;
+  	line-height: 18px;
+  }
+}
+
