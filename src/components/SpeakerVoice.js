@@ -1,18 +1,3 @@
-
-
-// class BormoSpeaker {
-// 	constructor() {
-
-// 	  this.speakerVoices = window.speechSynthesis.getVoices();
-// 	  const firstRus = this.speakerVoices.find((item) => item.lang === 'ru-RU');
-
-// 	  this.ssu = new SpeechSynthesisUtterance('');
-// 		this.voice = firstRus ?  firstRus : this.speakerVoices[0];
-// 		this.ssu['voice'] = this.voice;
-// 	  this.lang = firstRus ? 'ru-RU' : 'en-US';
-// 		}
-// 	}
-
 class SpeakerVoice  {
 	constructor(muteValue) {
 		this.supportSound = 'speechSynthesis' in window;
@@ -31,7 +16,7 @@ class SpeakerVoice  {
 			ssu.voice = voice;
 			ssu.volume = 1;
     	ssu.rate = 1.2;
-    	ssu.pitch = 0;
+    	ssu.pitch = 1;
 			const language = firstRus ? 'ru-RU' : 'en-US';
 			this.speaker = { 'ssu': ssu, 'voice': ssu.voice, 'lang': language};
 		}
