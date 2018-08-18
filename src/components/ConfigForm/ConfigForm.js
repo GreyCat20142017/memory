@@ -53,6 +53,11 @@ class ConfigForm extends React.Component {
                    id='id-check-2' name='sound' title='Звук'  checked={sound} onChange={this.handleCheckboxChange}/>
             <label className='option__label' htmlFor='id-check-2'>Звук</label>
         </p>
+        <p className='form__option option'>
+          <input  className='option__control option__control--checkbox visually-hidden' type='checkbox' id='id-check-3'
+           onChange={this.handleCheckboxChange} name='coloredBack' title='Подкрашивать карты' checked={coloredBack}/>
+          <label className='option__label' htmlFor='id-check-3'>Цветные карты</label>
+        </p>
 
         <ul className='form__options form__options--bordered form__options--radio'>
           <li className='form__option option'>
@@ -66,25 +71,17 @@ class ConfigForm extends React.Component {
             <label  className='option__label' htmlFor='id-radio-2'>52 карты</label>
           </li>
         </ul>
-
-
-        <p className='form__option option'>
-          <input  className='option__control option__control--checkbox visually-hidden' type='checkbox' id='id-check-3'
-           onChange={this.handleCheckboxChange} name='coloredBack' title='Подкрашивать карты' checked={coloredBack}/>
-          <label className='option__label' htmlFor='id-check-3'>Цветные карты</label>
-        </p>
-
+    
         <div className='form__field field field--required'>
           <label className='field__label' htmlFor='id-layoutDelay'>Пауза для запоминания раскладки, миллисекунды:</label>
           <input className='field__input field__input--small' type='text' pattern='\b[0-9]{4}'  maxLength='4' id='id-layoutDelay' name='layoutDelay'
                  placeholder='5000' title='Число милисекунд, от 1000 до 9999.' value={layoutDelay} onChange={this.handleInputChange} required/>
         </div>
 
-
         <div className='game__buttons game__buttons--form'>
           <button className='game__btn game__btn--small' type='submit'>Сохранить</button>
           <button className='game__btn game__btn--small' type='button' onClick={this.handleClose}>Отмена</button>
-          <p>*Новые параметры вступят в силу после перезапуска игры</p>
+          <p className='game__info'>*Новые параметры вступят в силу после перезапуска игры</p>
         </div>
 
       </form>

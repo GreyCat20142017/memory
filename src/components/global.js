@@ -1,3 +1,5 @@
+export const ENTER_KEYCODE = 13;
+
 export const VARIANTS = [36, 52];
 
 export const SCORE_MULTIPLIER = 42;

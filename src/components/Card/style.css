@@ -106,14 +106,9 @@
   display: none;
 }
 
-/*.card__content--suit {
-  margin-left: auto;
-}
-*/
-
 .card__content {
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   padding: 0;
   margin: 0;
   width: 100%;
@@ -121,10 +116,13 @@
 
 .card__content::before {
   content:  attr(data-value);
+  display: block;
  }
 
 .card__content::after {
   content:  attr(data-suit);
+  display: block;
+  margin-left: auto;
  }
 
 .card--invisible {

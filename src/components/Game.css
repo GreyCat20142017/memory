@@ -100,6 +100,12 @@
 	 margin-bottom: 10px;
 }
 
+.game__info {
+  text-align: center;
+  padding: 0;  
+  margin: 5px 0 0;
+}
+
 @media (min-width: 768px) {
   .game {
     width: 740px;
@@ -112,6 +118,7 @@
 
   .game__controls {
     margin: 20px 0 10px;
+    padding: 0;
     font-size: 20px;
   	line-height: 20px;
   }
@@ -136,6 +143,10 @@
   .game__btn--small {
   	font-size: 18px;
   	line-height: 18px;
+  }
+
+  .game__info {
+    text-align: left;
   }
 }
 

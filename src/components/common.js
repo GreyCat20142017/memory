@@ -47,6 +47,6 @@ export const generateArr = (amountPairs, amountTotal, stage) => {
 
 	const newArr =_reSortArr(arr).slice( 0, amountPairs).map(function(item, ind) {return {backcolor: (CONFIG.coloredBack ? ind+1: 0), code: item}});
 	const items = _reSortArr([...newArr,...newArr]);
-	return items.map(function({code, backcolor}, ind) {const data = {id: ind, code: code, stage: stage, suit: SUITS[Math.floor(code / amountInSuit)],
+	return items.map(function({code, backcolor}, ind) {const data = {id: 'id-'+ind, code: code, stage: stage, suit: SUITS[Math.floor(code / amountInSuit)],
 		value: values[code % amountInSuit], color: (code < amountTotal / 2) ? 'black' : 'red', backcolor: backcolor};  return data});
 };

@@ -16,8 +16,8 @@ class SpeakerVoice  {
 			ssu.voice = voice;
 			ssu.volume = 1;
     	ssu.rate = 1.2;
-    	ssu.pitch = 1;
-			const language = firstRus ? 'ru-RU' : 'en-US';
+    	ssu.pitch = 0;
+			const language = voice.lang; //firstRus ? 'ru-RU' : 'en-US';
 			this.speaker = { 'ssu': ssu, 'voice': ssu.voice, 'lang': language};
 		}
 	}

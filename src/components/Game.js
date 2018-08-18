@@ -13,7 +13,7 @@ import './Game.css'
 class  Game extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {items: new Array(AMOUNT_PAIRS * 2), score: 0, reverseList: [], openPairs: 0, status: 'stopped', currentScreen: 'Game'};
+		this.state = {items: new Array(AMOUNT_PAIRS * 2), score: 0, reverseList: [], openPairs: 0, status: 'not started', currentScreen: 'Game', renderOnly: []};
 		this.start = this.start.bind(this);
 		this.config = this.config.bind(this);
 		this.closeConfig = this.closeConfig.bind(this);
@@ -33,7 +33,7 @@ class  Game extends Component {
 		for (let i=0; i < items.length; i++) {
 			items[i].stage = (items[i].stage === 0) ? 1: 0;
 		};
-		this.setState({items: items, status: 'started'});
+		this.setState({items: items, status: 'started', renderOnly: []});
 	}
 
 	start() {
@@ -44,7 +44,8 @@ class  Game extends Component {
 			this.bormo.speak(START_MESSAGE[this.bormo.speaker.lang]);
 		}
 
-		this.setState({items: generateArr(AMOUNT_PAIRS, VARIANTS[CONFIG.cardsAmount], 1), score: 0, reverseList: [], openPairs: 0, status: 'waiting', currentScreen: 'Game'});
+		this.setState({items: generateArr(AMOUNT_PAIRS, VARIANTS[CONFIG.cardsAmount], 1), score: 0, reverseList: [], openPairs: 0, 
+			status: 'waiting', currentScreen: 'Game', renderOnly: []});
 		setTimeout(this.revertStage.bind(this), CONFIG.layoutDelay);
 	}
 
@@ -59,12 +60,14 @@ class  Game extends Component {
 				reverseList.push(idx);
 			}
 
-			this.setState({items: items})
+			this.setState({items: items, renderOnly: reverseList.map(item => items[item].id)})
 
 			if (reverseList.length === 2) {
 				const ok = items[reverseList[0]]['code'] === items[reverseList[1]]['code'];
 
-				this.bormo.speak(ok ? randomFromArray(OK_SOUNDS)[this.bormo.speaker.lang] : randomFromArray(ERROR_SOUNDS)[this.bormo.speaker.lang]);
+				if (this.bormo.supportSound ) {
+					this.bormo.speak(ok ? randomFromArray(OK_SOUNDS)[this.bormo.speaker.lang] : randomFromArray(ERROR_SOUNDS)[this.bormo.speaker.lang]);				
+				};
 
 				this.setState({status: 'waiting'});
 				setTimeout( f => {
@@ -78,11 +81,15 @@ class  Game extends Component {
 					openPairs = (ok) ? (openPairs + 1): openPairs;
 
 					if (openPairs === AMOUNT_PAIRS) {
-						this.bormo.speak(score >= CONGRATULATION_SCORE ? FINAL_MESSAGE[0][this.bormo.speaker.lang] : FINAL_MESSAGE[1][this.bormo.speaker.lang]);
+						if (this.bormo.supportSound) {
+							this.bormo.speak(score >= CONGRATULATION_SCORE ? FINAL_MESSAGE[0][this.bormo.speaker.lang] : FINAL_MESSAGE[1][this.bormo.speaker.lang]);
+						};	
 					};
 
+					const renderList = (openPairs === AMOUNT_PAIRS) ? []:  reverseList.map(item => items[item].id);	
 					reverseList = [];
-					this.setState({items: items, score: score, reverseList: reverseList, openPairs: openPairs, status: (openPairs === AMOUNT_PAIRS) ? 'finished' : 'started'})
+					this.setState({items: items, score: score, reverseList: reverseList, renderOnly: renderList,
+												openPairs: openPairs, status: (openPairs === AMOUNT_PAIRS) ? 'finished' : 'started'})
 				}, CLICK_DELAY);
 			};
 		};
@@ -97,8 +104,9 @@ class  Game extends Component {
 		switch (status) {
 			case 'started' : 	return 'Текущий счет: '+score;
 			case 'waiting' : 	return 'Пауза...';
-			case 'stopped' : 	return '' + VARIANTS[CONFIG.cardsAmount] + ' ' + (CONFIG.coloredBack ? 'цветн' : 'обычн') +
-												numstr(VARIANTS[CONFIG.cardsAmount], ['ая карта','ые карты','ых карт']) +	'.  Звук ' + (CONFIG.sound ? 'включен': 'отключен');
+			case 'not started' : 	return '' + VARIANTS[CONFIG.cardsAmount] + ' ' + (CONFIG.coloredBack ? 'цветн' : 'обычн') +
+												numstr(VARIANTS[CONFIG.cardsAmount], ['ая карта','ые карты','ых карт']) +	
+												'.  Звук ' + (this.bormo.supportSound ? (CONFIG.sound ? 'включен': 'отключен') : 'НЕ поддерживается');
 			case 'finished' :  return (score >= CONGRATULATION_SCORE? 'Примите поздравления!' : 'Игра окончена.') + ' Итоговый счет: ' + score;
 			default: return '';
 		}
@@ -118,14 +126,14 @@ class  Game extends Component {
 	render() {
 
 		if (this.state.currentScreen === 'Game') {
-			const {status, items} = this.state;
+			const {status, items, renderOnly} = this.state;
 			const lis = items.map(function(item, ind) {
-				return <li className='game__item' key = {ind}> <Card onCardClick = {this.onCardClick} data = {item}/></li>
+				return <li className='game__item' key = {ind}> <Card onCardClick = {this.onCardClick} data = {item} renderOnly={renderOnly}/></li>
 			}, this);
 
-			const buttonName = (status === 'stopped')? ' Начать игру': ((status === ' finished') ?  'Еще раз' : 'Перезапустить');
-			const gameWrapperContent = (status === 'stopped' || status === 'finished') ?
-				<Mult multTitle='Memory' multSubtitle='Игра по мотивам одного ТЗ'/> :
+			const buttonName = (status === 'not started')? ' Начать игру': ((status === ' finished') ?  'Еще раз' : 'Перезапустить');
+			const gameWrapperContent = (status === 'not started' || status === 'finished') ?
+				<Mult multTitle='Memory' multSubtitle='Игра по мотивам одного ТЗ...'/> :
 				<ul className='game__layout'>{lis}</ul>;
 
 			return (<div className='game'>
@@ -135,7 +143,7 @@ class  Game extends Component {
 				<div className='game__controls'>
 					<span className='game__score'> {this.getStatusMessage()}</span>
 					<div className='game__buttons'>
-						<button className='game__btn game__btn--start' type='button' onClick = {this.start} title='Начать или перезапусить игру'>{buttonName}</button>
+						<button className='game__btn game__btn--start' type='button' onClick = {this.start} title='Начать или перезапустить игру'>{buttonName}</button>
 						<button className='game__btn game__btn--config' type='button' onClick = {this.config} title='Настройка параметров игры'>&#9998;</button>
 					</div>
 				</div>
