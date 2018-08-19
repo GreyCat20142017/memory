@@ -4,13 +4,12 @@ import './style.css'
 class ConfigForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {cardsAmount: this.props.cardsAmount, sound: this.props.sound, layoutDelay: this.props.layoutDelay, coloredBack: this.props.coloredBack};
+    this.state = {cardsAmount: this.props.cardsAmount, sound: this.props.sound, layoutDelay: this.props.layoutDelay,
+                  coloredBack: this.props.coloredBack, saveConfig: this.props.saveConfig};
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
     this.handleCardsAmountChange = this.handleCardsAmountChange.bind(this);
-
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -32,8 +31,8 @@ class ConfigForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const {sound, coloredBack, cardsAmount, layoutDelay} = this.state
-    this.props.onCloseConfig({sound, coloredBack, cardsAmount, layoutDelay});
+    const {sound, coloredBack, cardsAmount, layoutDelay, saveConfig} = this.state
+    this.props.onCloseConfig({sound, coloredBack, cardsAmount, layoutDelay, saveConfig});
   }
 
 
@@ -43,14 +42,15 @@ class ConfigForm extends React.Component {
   }
 
   render() {
-    const {sound, coloredBack, cardsAmount, layoutDelay} = this.state
+    const {sound, coloredBack, cardsAmount, layoutDelay, saveConfig} = this.state;
+    console.log(this.props.speakerVoiceSupport.state);
     return (
       <form className='form' onSubmit={this.handleSubmit}>
        <h2>Настройка*</h2>
-       <p>Звук: {this.props.speakerVoiceSupport}</p>
+       <p>Звук: {this.props.speakerVoiceSupport.message}</p>
         <p className='form__option option'>
             <input className='option__control option__control--checkbox visually-hidden' type='checkbox'
-                   id='id-check-2' name='sound' title='Звук'  checked={sound} onChange={this.handleCheckboxChange}/>
+                   id='id-check-2' name='sound' title='Звук'  checked={sound} onChange={this.handleCheckboxChange} disabled={!this.props.speakerVoiceSupport.state}/>
             <label className='option__label' htmlFor='id-check-2'>Звук</label>
         </p>
         <p className='form__option option'>
@@ -66,17 +66,23 @@ class ConfigForm extends React.Component {
             <label className='option__label' htmlFor='id-radio-1'>36 карт</label>
           </li>
           <li className='form__option option'>
-            <input className='option__control option__control--radio visually-hidden' type='radio' id='id-radio-2' name='cardsAmount' title=' колода из 52 карт'
+            <input className='option__control option__control--radio visually-hidden' type='radio' id='id-radio-2' name='cardsAmount' title='колода из 52 карт'
             value='1' onChange={this.handleCardsAmountChange}  checked = {cardsAmount === 1}/>
             <label  className='option__label' htmlFor='id-radio-2'>52 карты</label>
           </li>
         </ul>
-    
+
         <div className='form__field field field--required'>
           <label className='field__label' htmlFor='id-layoutDelay'>Пауза для запоминания раскладки, миллисекунды:</label>
           <input className='field__input field__input--small' type='text' pattern='\b[0-9]{4}'  maxLength='4' id='id-layoutDelay' name='layoutDelay'
-                 placeholder='5000' title='Число милисекунд, от 1000 до 9999.' value={layoutDelay} onChange={this.handleInputChange} required/>
+                 placeholder='5000' title='Число милисекунд, от 1000 до 9999' value={layoutDelay} onChange={this.handleInputChange} required/>
         </div>
+
+        <p className='form__option option'>
+          <input  className='option__control option__control--checkbox visually-hidden' type='checkbox' id='id-check-4'
+           onChange={this.handleCheckboxChange} name='saveConfig' title='Сохранять параметры игры при выходе' checked={saveConfig} disabled/>
+          <label className='option__label option__label--small' htmlFor='id-check-4'>Сохранять параметры при выходе из игры</label>
+        </p>
 
         <div className='game__buttons game__buttons--form'>
           <button className='game__btn game__btn--small' type='submit'>Сохранить</button>

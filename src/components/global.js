@@ -16,14 +16,15 @@ export const OK_SOUNDS = [{'ru-RU': 'Это правильно', 'en-US': 'Corre
 											{'ru-RU': 'Да', 'en-US': 'Yes'}, {'ru-RU': 'Точно', 'en-US': 'Exactly'},
 											{'ru-RU': 'Есть', 'en-US': 'Right'}, {'ru-RU': 'Класс', 'en-US': 'Truly'}];
 
-export const FINAL_MESSAGE = [{'ru-RU': 'Это здорово!', 'en-US': 'it`s great'},
-											{'ru-RU': 'Нормально, но нужно расти над собой...', 'en-US': 'It`s normal, but you need to grow above yourself ...'}];
+export const FINAL_MESSAGE = [{'ru-RU': 'Это здорово!', 'en-US': 'Great!'},
+											{'ru-RU': 'Нормально, но нужно расти над собой...', 'en-US': 'It is normal, but you need to grow above yourself ...'}];
 
-export const START_MESSAGE = {'ru-RU': 'Игра начнется, когда карты перевернутся', 'en-US': 'The game will start when the cards turn over'};
+export const START_MESSAGE = {'ru-RU': 'Игра начинается, когда карты лежат рубашками вверх', 'en-US': 'The game will start when the cards turn over'};
 
 export const CONFIG = {
 	cardsAmount: 0,
 	layoutDelay: 1000,
 	coloredBack: true,
-	sound: true
+	sound: (window.navigator.userAgent.indexOf("Chrome") >= 0) ? true : false,
+  saveConfig: false
 }

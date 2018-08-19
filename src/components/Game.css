@@ -65,6 +65,7 @@
   border: none;
   color: white;
   background-color: navy;
+  cursor: pointer;
 }
 
 .game__btn--small {
@@ -102,7 +103,7 @@
 
 .game__info {
   text-align: center;
-  padding: 0;  
+  padding: 0;
   margin: 5px 0 0;
 }
 
