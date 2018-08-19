@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import './ConfigForm.css'
 
 class ConfigForm extends React.Component {
   constructor(props) {

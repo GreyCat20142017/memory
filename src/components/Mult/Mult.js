@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import './Mult.css'
 
 class Mult extends React.Component {
 
