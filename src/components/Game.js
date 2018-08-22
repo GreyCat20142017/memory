@@ -4,10 +4,12 @@ import ConfigForm from './ConfigForm/ConfigForm.js'
 import Mult from './Mult/Mult.js'
 import SpeakerVoice from './SpeakerVoice'
 
-import {VARIANTS, AMOUNT_PAIRS, SCORE_MULTIPLIER, CLICK_DELAY, CONGRATULATION_SCORE, ERROR_SOUNDS, OK_SOUNDS, FINAL_MESSAGE, START_MESSAGE, CONFIG} from './global.js'
+import {VARIANTS, AMOUNT_PAIRS, SCORE_MULTIPLIER, CLICK_DELAY, CONGRATULATION_SCORE, ERROR_SOUNDS, OK_SOUNDS,
+        FINAL_MESSAGE, START_MESSAGE, CONFIG} from './global.js'
 import {numstr, randomFromArray, generateArr} from './common.js'
 
 import './Game.css'
+
 
 
 class  Game extends Component {
@@ -17,15 +19,15 @@ class  Game extends Component {
     this.start = this.start.bind(this);
     this.config = this.config.bind(this);
     this.closeConfig = this.closeConfig.bind(this);
-    this.onCardClick = this.onCardClick.bind(this);
+    this.handleCardClick = this.handleCardClick.bind(this);
     this.bormo = new SpeakerVoice();
   }
 
   componentDidMount() {
     if (this.bormo.supportSound) {
-// eslint-disable-next-line
-const speechSynthesisFeatureFixing = window.speechSynthesis.getVoices();
-}
+      // eslint-disable-next-line
+    const speechSynthesisFeatureFixing = window.speechSynthesis.getVoices();
+  }
 }
 
 revertStage() {
@@ -46,11 +48,11 @@ start() {
   }
 
   this.setState({items: generateArr(AMOUNT_PAIRS, VARIANTS[CONFIG.cardsAmount], 1), score: 0, reverseList: [], openPairs: 0,
-    status: 'waiting', currentScreen: 'Game', renderOnly: []});
-  setTimeout(this.revertStage.bind(this), CONFIG.layoutDelay);
+                status: 'waiting', currentScreen: 'Game', renderOnly: []});
+                setTimeout(this.revertStage.bind(this), CONFIG.layoutDelay);
 }
 
-onCardClick(id) {
+handleCardClick(id) {
 
   let {items, score, reverseList, openPairs, status} = this.state;
   const idx = items.indexOf(items.filter(item => item.id === id)[0]);
@@ -59,9 +61,9 @@ onCardClick(id) {
     items[idx]['stage'] = (items[idx]['stage']) === 0 ? 1: 0;
     if (items[idx]['stage'] === 1) {
       reverseList.push(idx);
-    }
+    };
 
-    this.setState({items: items, renderOnly: reverseList.map(item => items[item].id)})
+    this.setState({items: items, renderOnly: reverseList.map(item => items[item].id)});
 
     if (reverseList.length === 2) {
       const ok = items[reverseList[0]]['code'] === items[reverseList[1]]['code'];
@@ -90,8 +92,7 @@ onCardClick(id) {
         const renderList = (openPairs === AMOUNT_PAIRS) ? []:  reverseList.map(item => items[item].id);
         reverseList = [];
         this.setState({items: items, score: score, reverseList: reverseList, renderOnly: renderList,
-          openPairs: openPairs, status: (openPairs === AMOUNT_PAIRS) ? 'finished' : 'started'})
-      }, CLICK_DELAY);
+                       openPairs: openPairs, status: (openPairs === AMOUNT_PAIRS) ? 'finished' : 'started'})}, CLICK_DELAY);
     };
   };
 }
@@ -130,7 +131,7 @@ render() {
   if (this.state.currentScreen === 'Game') {
     const {status, items, renderOnly} = this.state;
     const lis = items.map(function(item, ind) {
-      return <li className='game__item' key = {ind}> <Card onCardClick = {this.onCardClick} data = {item} renderOnly={renderOnly}/></li>
+      return <li className='game__item' key = {ind}> <Card handleCardClick = {this.handleCardClick} data = {item} renderOnly={renderOnly}/></li>
     }, this);
 
     const buttonName = (status === 'not started')? ' Начать игру': ((status === ' finished') ?  'Еще раз' : 'Перезапустить');
@@ -154,12 +155,10 @@ render() {
   }
   else { //currentScreen === ' Config'
     const speakerVoiceSupport = {message: this.bormo.getVoiceSupport(), state: this.bormo.supportSound};
-  return (<div className='game'>
-    <div className='game__wrapper game__wrapper--config'>
-      <ConfigForm speakerVoiceSupport = {speakerVoiceSupport} sound = {CONFIG.sound} coloredBack = {CONFIG.coloredBack}
-      cardsAmount = {CONFIG.cardsAmount} layoutDelay = {CONFIG.layoutDelay} saveConfig = {CONFIG.saveConfig}
-      onCloseConfig = {this.closeConfig}/>
-      </div>
+    return (
+    <div>
+        <ConfigForm speakerVoiceSupport = {speakerVoiceSupport} sound = {CONFIG.sound} coloredBack = {CONFIG.coloredBack} cardsAmount = {CONFIG.cardsAmount}
+                    layoutDelay = {CONFIG.layoutDelay} saveConfig = {CONFIG.saveConfig}  onCloseConfig = {this.closeConfig}/>
     </div>)
   }
 }

@@ -1,4 +1,13 @@
+export const INITIAL_CONFIG = {
+  cardsAmount: 0,
+  layoutDelay: 5000,
+  coloredBack: true,
+  sound: (window.navigator.userAgent.indexOf("Chrome") >= 0) ? true : false,
+  saveConfig: false
+};
+
 export const ENTER_KEYCODE = 13;
+export const ESC_KEYCODE = 27;
 
 export const VARIANTS = [36, 52];
 
@@ -21,10 +30,5 @@ export const FINAL_MESSAGE = [{'ru-RU': 'Это здорово!', 'en-US': 'Grea
 
 export const START_MESSAGE = {'ru-RU': 'Игра начинается, когда карты лежат рубашками вверх', 'en-US': 'The game will start when the cards turn over'};
 
-export const CONFIG = {
-	cardsAmount: 0,
-	layoutDelay: 1000,
-	coloredBack: true,
-	sound: (window.navigator.userAgent.indexOf("Chrome") >= 0) ? true : false,
-  saveConfig: false
-}
+
+export const CONFIG = Object.assign({}, INITIAL_CONFIG);
