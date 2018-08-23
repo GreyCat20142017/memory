@@ -8,19 +8,30 @@ class Mult extends React.Component {
 
 		return (
 			<div className='mult'>
-				<div className='mult__container'>
-					<h1 className='mult__title'>{multTitle}</h1>
-					<div className='mult__wrapper'>
-						<span className='mult__suit mult__suit--dark'>&clubs;</span>
-						<span className='mult__suit mult__suit--red'>&hearts;</span>
-						<span className='mult__suit mult__suit--red'>&diams;</span>
-						<span className='mult__suit mult__suit--dark'>&spades;</span>
-					</div>
-					<p className='mult__subtitle'>{multSubtitle}</p>
-				</div>
-			</div>)
+
+        <div className='mult__container'>
+          <h1 className='mult__title'>{multTitle}</h1>
+          <div className='mult__wrapper'>
+            <svg className="mult__suit mult__suit--dark" viewBox="0 0 209.359 209.359" width="150" height="150">
+              <path d="m209.359,113.917c0,-28.785 -23.853,-52.552 -53.289,-53.228c0.351,-2.459 0.526,-4.964 0.526,-7.44c0,-29.361 -24.469,-53.235 -54.56,-53.235c-30.084,0 -54.552,23.875 -54.552,53.235c0,3.497 0.354,6.986 1.041,10.404c-27.252,2.923 -48.525,26.06 -48.525,52.894c0,29.354 24.479,53.243 54.57,53.243c16.37,0 40.137,-13.12001 50.43,-25.43101c-4.309,19.372 -25.993,55.46601 -62.075,64.98901l0,0l0,0l124.429,0l2.646,0.011l0,0c-1.636,-0.401 -47.764,-22.011 -60,-65c10.21,10.769 29.714,22.78401 44.795,22.78401c30.081,0.002 54.564,-23.873 54.564,-53.226l0,-0.00001z"/>
+            </svg>
+            <svg className="mult__suit mult__suit--red" viewBox="0 0 105.34239 148.43164" width="150" height="150">
+             <path d="m52.29322,148.29915l-52.16072,-74.08334l52.16072,-74.08332l52.91667,74.08333l-52.91667,74.08333z"/>
+            </svg>
+            <svg className="mult__suit mult__suit--red" viewBox="-2 -2 62 62" width="150" height="150">
+               <path d="m28.947,58.486c15.685,-11.277 23.532,-23.592 27.222,-31.46c4.311,-9.193 0.561,-20.589 -8.845,-24.413c-11.056,-4.493 -18.377,5.873 -18.377,5.873c0,0 -7.269,-10.393 -18.324,-5.898c-9.406,3.824 -13.156,15.22 -8.845,24.413c3.69,7.867 11.484,20.209 27.169,31.485z"/>
+            </svg>
+            <svg className="mult__suit mult__suit--dark"  viewBox="0 0 533.333 533.333" width="150" height="150">
+               <path d="m421.817,181.328c-100.816,-74.926 -131.555,-134.905 -155.149,-181.327l0,0c-0.002,0 -0.002,-0.001 -0.002,-0.001l4,0.001c-23.592,46.422 -58.333,106.402 -159.149,181.327c-171.893,127.753 18.225,300.15201 160.483,202.00501c-9.269,60.9 -79.876,130.882 -112,150l0.658,-0.00001l106.008,0l106.008,0l5.326,0.00001c-32.126,-19.118 -88.73,-89.098 -98,-150c142.257,98.149 313.709,-74.25201 141.817,-202.00501z"/>
+            </svg>
+          </div>
+          <p className='mult__subtitle'>{multSubtitle}</p>
+      </div>
+      </div>)
 	}
 
 }
 
 export default Mult
+
+

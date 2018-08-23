@@ -1,6 +1,7 @@
 class SpeakerVoice  {
   constructor(muteValue) {
     this.supportSound = 'speechSynthesis' in window;
+    this.supportRuEn = false;
     this.speaker = null;
     this.speakerMuted = muteValue;
     this.setSpeaker = this.setSpeaker.bind(this);
@@ -10,15 +11,17 @@ class SpeakerVoice  {
   setSpeaker() {
     if (this.supportSound && this.speaker === null) {
       const voiceList = window.speechSynthesis.getVoices();
-      const firstRus = voiceList.find((item) => item.lang === 'ru-RU');
+      const firstRus = voiceList.find((item) => item.lang.slice(0, 2) === 'ru');
+      const firstEng = voiceList.find((item) => item.lang.slice(0, 2) === 'en');
       const ssu = new SpeechSynthesisUtterance('');
-      const voice = firstRus ?  firstRus : voiceList[0];
+      const voice = firstRus ?  firstRus : (firstEng ? firstEng : voiceList[0]);
       ssu.voice = voice;
       ssu.volume = 1;
       ssu.rate = 1.2;
-      ssu.pitch = 1;
-      const language = voice.lang;
-      this.speaker = { 'ssu': ssu, 'voice': ssu.voice, 'lang': language};
+      ssu.pitch = 1.7;
+      const language = voice.lang.slice(0, 2);
+      this.supportRuEn = (language === 'ru' || language ==='en');
+      this.speaker = {'ssu': ssu, 'voice': ssu.voice, 'lang': language};
     }
   }
 
@@ -27,20 +30,24 @@ class SpeakerVoice  {
   }
 
   speak(text) {
-    console.log(this.speakerMuted);
-    if (this.supportSound && this.speaker && !this.speakerMuted) {
+    if (this.supportSound &&  this.supportRuEn && this.speaker && !this.speakerMuted) {
       let {ssu, voice} = this.speaker;
 
       ssu.text = text;
       if (window.navigator.userAgent.indexOf("Firefox") >= 0) {
         ssu = new SpeechSynthesisUtterance(text);
+        ssu.rate = 0.9;
+        ssu.pitch = 1.7;
         ssu.voice = voice;
       };
-      window.speechSynthesis.speak(ssu);
+      if (text) {
+        window.speechSynthesis.speak(ssu);
+      };
      }
     }
 
-  getVoiceSupport() {return 'Ваш браузер ' + (this.supportSound ? '' : ' НЕ ') + ' поддерживает синтез речи';}
+  getVoiceSupport() {return 'Ваш браузер ' + (this.supportSound ? '' : ' НЕ ') + ' поддерживает синтез речи'+
+  (this.supportRuEn? '' : '. Синтез RU/EN недоступен');}
 
   }
 

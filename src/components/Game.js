@@ -41,11 +41,13 @@ revertStage() {
 start() {
   if (this.state.status === 'waiting') { return;};
 
-  if (this.bormo.supportSound && (this.bormo.speaker === null)) {
-    this.bormo.setSpeaker();
-    this.bormo.mute(!CONFIG.sound);
+  if (this.bormo.supportSound) {
+   if (this.bormo.speaker === null) {
+      this.bormo.setSpeaker();
+      this.bormo.mute(!CONFIG.sound);
+    };
     this.bormo.speak(START_MESSAGE[this.bormo.speaker.lang]);
-  }
+  };
 
   this.setState({items: generateArr(AMOUNT_PAIRS, VARIANTS[CONFIG.cardsAmount], 1), score: 0, reverseList: [], openPairs: 0,
                 status: 'waiting', currentScreen: 'Game', renderOnly: []});
@@ -98,6 +100,10 @@ handleCardClick(id) {
 }
 
 config() {
+  if (this.bormo.supportSound && (this.bormo.speaker === null)) {
+    this.bormo.setSpeaker();
+    this.bormo.mute(!CONFIG.sound);
+  }
   this.setState({currentScreen: 'Config'});
 }
 

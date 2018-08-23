@@ -17,18 +17,18 @@ export const CONGRATULATION_SCORE = 1000;
 
 export const AMOUNT_PAIRS = 9;
 
-export const ERROR_SOUNDS = [{'ru-RU': 'Ай', 'en-US': 'Not correct'}, {'ru-RU': 'Ой', 'en-US': 'False'}, {'ru-RU': 'Ошибочка', 'en-US': 'Mistake'},
-											{'ru-RU': 'Ну нет', 'en-US': 'No'}, {'ru-RU': 'Мимо', 'en-US': 'Not right'},
-											{'ru-RU': 'Это промах', 'en-US': 'Oh, no!'}, {'ru-RU': 'Ох', 'en-US': 'Misstep'}];
+export const ERROR_SOUNDS = [{'ru': 'Ай', 'en': 'Not correct'}, {'ru': 'Ой', 'en': 'False'}, {'ru': 'Ошибочка', 'en': 'Mistake'},
+											{'ru': 'Ну нет', 'en': 'No'}, {'ru': 'Мимо', 'en': 'Not right'},
+											{'ru': 'Это промах', 'en': 'Oh, no!'}, {'ru': 'Ох', 'en': 'Misstep'}, {'ru': 'Несовпадение', 'en': 'Error'}];
 
-export const OK_SOUNDS = [{'ru-RU': 'Это правильно', 'en-US': 'Correct'}, {'ru-RU': 'Попадание', 'en-US': 'Hit'}, {'ru-RU': 'Ура', 'en-US': 'Hurrah!'},
-											{'ru-RU': 'Да', 'en-US': 'Yes'}, {'ru-RU': 'Точно', 'en-US': 'Exactly'},
-											{'ru-RU': 'Есть', 'en-US': 'Right'}, {'ru-RU': 'Класс', 'en-US': 'Truly'}];
+export const OK_SOUNDS = [{'ru': 'Это правильно', 'en': 'Correct'}, {'ru': 'Попадание', 'en': 'Hit'}, {'ru': 'Ура', 'en': 'Hurrah!'},
+											{'ru': 'Да', 'en': 'Yes'}, {'ru': 'Точно', 'en': 'Exactly'},  {'ru': 'Хорошо', 'en': 'OK'},
+											{'ru': 'Есть', 'en': 'Right'}, {'ru': 'Класс', 'en': 'Truly'}];
 
-export const FINAL_MESSAGE = [{'ru-RU': 'Это здорово!', 'en-US': 'Great!'},
-											{'ru-RU': 'Нормально, но нужно расти над собой...', 'en-US': 'It is normal, but you need to grow above yourself ...'}];
+export const FINAL_MESSAGE = [{'ru': 'Это здорово!', 'en': 'Great!'},
+											{'ru': 'Нормально, но нужно расти над собой...', 'en': 'It is normal, but you need to grow above yourself ...'}];
 
-export const START_MESSAGE = {'ru-RU': 'Игра начинается, когда карты лежат рубашками вверх', 'en-US': 'The game will start when the cards turn over'};
+export const START_MESSAGE = {'ru': 'Игра начинается, когда карты лежат рубашками вверх', 'en': 'The game will start when the cards turn over'};
 
 
 export const CONFIG = Object.assign({}, INITIAL_CONFIG);

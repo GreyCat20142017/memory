@@ -55,14 +55,15 @@
 
 .mult__suit {
   display: none;
-  font-size: 260px;
-  line-height: 180px;
-  vertical-align: top;
-  text-shadow: 12px 12px 26px rgba(0, 0, 0, 0.3);
+  width: 150px;
+  height: 150px;
+  margin: 20px 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .mult__suit:nth-of-type(1) {
-  display: flex;
+  display: block;
 }
 
 .mult__suit--red {
@@ -92,23 +93,29 @@
   from,
   to {
     color: red;
+    fill: red;
+    stroke: red;
   }
   50% {
     color: navy;
+    fill: navy;
+    stroke: navy;
   }
 }
-
 
 @keyframes coloration-revert {
   from,
   to {
     color: navy;
+    fill: navy;
+    stroke: navy;
   }
   50% {
     color: red;
+    fill: red;
+    stroke: red;
   }
 }
-
 
 @media (min-width: 768px) {
   .mult {
@@ -118,6 +125,7 @@
 
   .mult__suit {
     display: flex;
+    filter: drop-shadow(10px 10px 26px rgba(0, 0, 0, 0.3));
   }
 
   .mult__title {
@@ -131,5 +139,3 @@
     line-height: 30px;
   }
 }
-
-
