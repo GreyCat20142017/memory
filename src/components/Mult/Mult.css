@@ -70,12 +70,16 @@
   animation: 12s forwards infinite ease-in-out;
   animation-name: spin, coloration;
   color: red;
+  fill: red;
+  stroke: red;
 }
 
 .mult__suit--dark {
   animation: 12s forwards infinite;
   animation-name: spin, coloration-revert;
   color: navy;
+  fill: navy;
+  stroke: navy;
 }
 
 @keyframes spin {
