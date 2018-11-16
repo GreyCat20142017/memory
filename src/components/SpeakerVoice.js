@@ -18,7 +18,7 @@ class SpeakerVoice  {
       ssu.voice = voice;
       ssu.volume = 1;
       ssu.rate = 1.2;
-      ssu.pitch = 1.7;
+      ssu.pitch = 1;
       const language = voice.lang.slice(0, 2);
       this.supportRuEn = (language === 'ru' || language ==='en');
       this.speaker = {'ssu': ssu, 'voice': ssu.voice, 'lang': language};
@@ -37,7 +37,7 @@ class SpeakerVoice  {
       if (window.navigator.userAgent.indexOf("Firefox") >= 0) {
         ssu = new SpeechSynthesisUtterance(text);
         ssu.rate = 0.9;
-        ssu.pitch = 1.7;
+        ssu.pitch = 1;
         ssu.voice = voice;
       };
       if (text) {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="navy">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Автор: неизвестен, реализация: greycat20142017, назначение: учебный проект">
+    <meta name="description" content="Автор идеи: неизвестен, реализация: greycat20142017, назначение: учебный проект">
 
     <!--
       manifest.json provides metadata used when your web app is added to the
@@ -41,4 +41,21 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+   <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function(err) {
+            console.log(err)
+          });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }
+    </script>
 </html>
